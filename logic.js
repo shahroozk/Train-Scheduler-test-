@@ -28,16 +28,19 @@ var destination = "";
 var trainTime = 0;
 var frequency = 0;
 
+
+
+
 // Capture Button Click
 $("#add-train").on("click", function(event){
 // Code in the logic for storing and retrieving the most recent user.
  event.preventDefault();
  trainName = $("#trainName-input").val().trim();
  destination= $("#destination-input").val().trim();
- trainTime = $("#trainTime-input").val().trim();
  frequency= $("#frequency-input").val().trim();
- 
-   dataRef.ref().push({
+ trainTime = $("#trainTime-input").val().trim();
+   
+ dataRef.ref().push({
     trainName: trainName,
     destination: destination,
     trainTime:trainTime,
@@ -54,14 +57,13 @@ dataRef.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
     console.log(childSnapshot.val().trainName);
     console.log(childSnapshot.val().destination);
-    console.log(childSnapshot.val().trainTime);
     console.log(childSnapshot.val().frequency);
-
+    console.log(childSnapshot.val().trainTime);
 $("#full-train-list").append("<tr class='full-train-list'><th class='trainName-list'> " +
 childSnapshot.val().trainName + 
 "</th><td class='distination-list'> " + childSnapshot.val().destination +
-"</td><td class='trainTime-list'> " + childSnapshot.val().trainTime +
 "</td><td class='frequency-list'> " + childSnapshot.val().frequency +
+"</td><td class='trainTime-list'> " + childSnapshot.val().trainTime +
 "</td></th>");
 
 }, function(errorObject) {
@@ -82,8 +84,8 @@ childSnapshot.val().trainName +
 dataRef.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function(snapshot) {
 $("#trainName-display").text(snapshot.val().trainName);
 $("#distination-display").text(snapshot.val().destination);
-$("#trainTime-display").text(snapshot.val().trainTime);
 $("#frequency-display").text(snapshot.val().frequency);
+$("#trainTime-display").text(snapshot.val().trainTime);
 
 });
       
